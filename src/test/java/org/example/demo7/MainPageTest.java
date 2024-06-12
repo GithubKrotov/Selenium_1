@@ -1,10 +1,8 @@
 package org.example.demo7;
 
-import dev.failsafe.internal.util.Assert;
-import org.junit.jupiter.api.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,12 +12,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainPageTest {
     private WebDriver driver;
-    
+
 
     @BeforeEach
     public void setUp() {
@@ -56,14 +55,15 @@ public class MainPageTest {
         searchField.submit();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
         wait.until(ExpectedConditions.and(
-                        ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(":not(.b_adurl) > cite"), "selenium"),
-                        ExpectedConditions.elementToBeClickable(By.cssSelector(":not(.b_adurl) > cite"))
-                ));
+                ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(":not(.b_adurl) > cite"), "selenium"),
+                ExpectedConditions.elementToBeClickable(By.cssSelector(":not(.b_adurl) > cite"))
+        ));
         List results = driver.findElements(By.cssSelector(":not(.b_adurl) > cite"));
-        clickElement(results,0);
+        clickElement(results, 0);
         String url = driver.getCurrentUrl();
     }
-  public void clickElement(List<WebElement> results, int num) {
-    results.get(0).click();
-  }
+
+    public void clickElement(List<WebElement> results, int num) {
+        results.get(0).click();
+    }
 }
