@@ -1,6 +1,7 @@
 package org.example.demo7;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -61,9 +63,11 @@ public class MainPageTest {
         List results = driver.findElements(By.cssSelector(":not(.b_adurl) > cite"));
         clickElement(results, 0);
         String url = driver.getCurrentUrl();
+        System.out.println(url);
+        Assertions.assertTrue(url.contains("selenium.dev"), "Переход по ссылке не сработал");
     }
 
     public void clickElement(List<WebElement> results, int num) {
-        results.get(0).click();
+        results.get(num).click();
     }
 }
